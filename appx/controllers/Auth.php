@@ -11,40 +11,37 @@
      }
      //add users
      function index_post(){
+	     $firstname = $this->post('firstname');
+         $lastname = $this->post('lastname');
+	     $email = $this->post('email');
+	     $password = md5($this->post('password'));
+         $phonenumber = $this->post('phone');
          $data = array(
-             'firstname' => $this->post('firstname'),
-             'lastname' => $this->post('lastname'),
-             'email' => $this->post('email'),
-             'password' => $this->post('password'),
-             'phonenumber' => $this->post('phone'),
-             'idnumber' => $this->post('idnumber')
+             'firstname' => $firstname,
+             'lastname' => $lastname,
+             'email' => $email,
+             'password' => $password,
+             'phonenumber' => $phonenumber
          );
-         $subject = "Response";
-         $message = "You have registered successfully";
-         $cdata = array('idnumber' => $this->post('idnumber'));
+         $response = "";
+         $cdata = array(
+               'email' => $email
+         );
          $checkuser = $this->User_model->check_user($cdata);
-         if($checkuser != false){
-             echo "0";
+         if($checkuser == true){
+             $response ="false";
          }
          else{
             $add = $this->User_model->add_user($data);
-            if($add != false){
-                $to = $data['email'];
-                $subject = "Success";
-                $message = "Registration Successful";
-                // Load PHPMailer library
-                if($this->emailhandler->sendMail($to,$subject,$message)){
-                    echo "Message sent successfully";
-                }
-                else{
-                    echo "Message could not be sent";
-                }
+            if($add){
+                $response = "true";
             }
             else{
                 //$response = array('message'=>'User not created successfully');
-                echo "2"; 
+                $response ="false";
             }
          } 
+         echo $response;
      }
      //get all users
      function index_get(){
@@ -58,8 +55,8 @@
      }
      //delete a user
      function index_delete(){
-         $idnumber = $this->delete('identity'); 
-         if($this->User_model->deleteUser($idnumber)){
+         $email = $this->delete('email'); 
+         if($this->User_model->deleteUser($email)){
              echo "User deleted successfully";
          }
          else{

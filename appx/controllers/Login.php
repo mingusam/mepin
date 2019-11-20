@@ -9,7 +9,7 @@
     }
     function index_post(){
         $email = $this->post('email');
-        $password = $this->post('password');
+        $password = md5($this->post('password'));
         $response = "";
         $conditions = array(
            'email' => $email,
@@ -25,13 +25,13 @@
         echo $response;
     }
     function index_get(){
-        $id = $this->get('identity');
-        $getuser = $this->User_model->getUserById($id);
+        $email = $this->post('email');
+        $getuser = $this->User_model->getUserById($email);
         if($getuser){
-            $this->response($getuser);
+            echo json_encode(array("user"=>$getuser));
         }
         else{
-            echo "No user found";
+            echo json_encode("No records found",404);
         }
     }        
  }

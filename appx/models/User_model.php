@@ -12,10 +12,10 @@ class User_model extends CI_Model{
             return false;
         }
     }
-    public function getUserById($id){
-        $this->db->select('firstname,lastname,email,idnumber,phonenumber');
+    public function getUserById($email){
+        $this->db->select('firstname,lastname,email,phonenumber');
         $this->db->from('user_details');
-        $this->db->where('idnumber',$id);
+        $this->db->where('email',$email);
         $query = $this->db->get();
         if($query->num_rows() == 1){
             return $query->result_array();
@@ -56,8 +56,8 @@ class User_model extends CI_Model{
           return 0;
         }
     }
-    public function deleteUser($idnumber){
-        $this->db->where('idnumber',$idnumber);
+    public function deleteUser($email){
+        $this->db->where('email',$email);
         if($this->db->delete('user_details')){
             return true;
         }

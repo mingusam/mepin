@@ -29,6 +29,15 @@
                 return 0;
             }
         }
+        public function addLipa($data){
+            $addtransaction = $this->db->insert('lipanampesa',$data);
+            if($addtransaction){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
 ?>
