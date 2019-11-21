@@ -9,30 +9,35 @@
         }
         //add business
         public function index_post(){
+	    $shortcode = $this->post('shortcode');
+	    $bizname = $this->post('bizname');
+            $bizlocation = $this->post('bizlocation');
+            $email = $this->post('email');
             $data = array(
-               'idnumber'=>$this->post('idnumber'),
-               'business_name'=>$this->post('bizname'),
-               'business_location'=>$this->post('bizlocation'),
-               'business_type'=>$this->post('biztype'),
-               'shortcode'=>$this->post('shortcode')
+               'business_name'=>$bizname,
+               'business_location'=>$bizlocation,
+               'shortcode'=>$shortcode,
+               'email'=>$email
             );
             $nameinfo = $data['business_name'];
             //check business first
             $checkifbizexisists = $this->Business_model->checkBusiness($nameinfo);
+            $response ="";
             //ifbizexists
             if($checkifbizexisists){
-                echo "2";
+                $response ="false";
             }
             //add business
             else{
                 $adduser = $this->Business_model->createBusiness($data);
                 if($adduser){
-                    echo "1";
+                    $response ="true";
                 }
                 else{
-                    echo "0";
+                    $response ="false";
                 }
             }
+  	    echo $response;
         }
         //get all businesses
         public function index_get(){

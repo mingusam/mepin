@@ -17,6 +17,12 @@
                 return 0;
             }
         }
+        public function getStatus($merchantid){
+	    $this->db->select('*");
+            $this->db->from('lipanampesa');
+            
+            
+        }
         public function getTransactions($shortcode){
             $this->db->select('*');
             $this->db->from('lipanampesa');
