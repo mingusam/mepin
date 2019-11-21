@@ -41,12 +41,13 @@
         }
         //get all businesses
         public function index_get(){
-            $allbizs = $this->Business_model->getAllBusinesses();
+            $email = $this->get('email');
+            $allbizs = $this->Business_model->getBusinessByOwner($email);
             if($allbizs){
-                return $this->response($allbizs,200);
+                echo json_encode(array("result"=>$allbizs));
             }
             else{
-                return $this->response("No records found",404);
+                echo json_encode(array("result"=>"No results found"));
             }
         }
         //delete a business

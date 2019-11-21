@@ -3,7 +3,7 @@
 
     class Mpesa{
         public $securitycredentials = "hkOJbliegnunsX+TpUYOY8g9TFu4jOgmf9K+URSk/e8Z5PbBxc7kjuB9kZv+nJcmUz2KjY8C1Rq1hexYZ6zUE1n7LBQapFEQSftHKvJtdkVfOK0IG/3pmNY6HzyW40LW27x4xbPwzZpn4B/HWD5M6Bnqnd+oAmaZ8iUFDG5ivnljL49X9YqZ7i9qGkDV1wT0GNxoJ37+dpV3a0RIaAU2J5JcyBKz+3vNe6BlD1AT9yhDaFZ2UOUc3vj34w6K3GInzVVzsEppnaao9ZcHmaKCkD1qOsop0tWBzLow1wyq0uLP5zzMGm+F4RcZa4kwM6SrtyhyxEb4s25FpCcNF45duA==";
-        public $baseurl = "https://af63d159.ngrok.io/mepin/";
+        public $baseurl = "https://506c62be.ngrok.io/mepin/";
 
         protected $CI;
         public function __construct(){

@@ -15,10 +15,10 @@
           }
         }
         //get business owner
-        public function getBusinessByOwner($idnumber){
-            $this->db->select('business_name,business_location,business_type');
+        public function getBusinessByOwner($email){
+            $this->db->select('business_name,business_location,shortcode');
             $this->db->from('business_details');
-            $this->db->where('idnumber',$idnumber);
+            $this->db->where('email',$email);
             $query = $this->db->get();
             if($query->num_rows()>0){
                 return $query->result_array();

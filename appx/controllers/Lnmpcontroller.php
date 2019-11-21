@@ -20,26 +20,32 @@
             $response = $this->mpesa->stkpush($shortcode,$amount,$partya,$partyb,$phone,$desc);
             $output = json_decode($response);
             $merchantid = $output->MerchantRequestID;
+            $responsedescription = $output->ResponseDescription;
             $responsecode = $output->ResponseCode;
-            $res = "";
-
+            $mydate=getdate(date("U"));
+            $date = $mydate['mday'].$mydate['month'].$mydate['year'];
+            
             if($responsecode == 0){
                 $data = array(
                     "merchantRequestID"=>$merchantid,
                     "amount"=>$amount,
-                    "transactiondate"=>$date,
+                    "transactionDate"=>$date,
+                    "phoneNumber"=>$phone,
+                    "description"=>$desc,
                     "shortcode"=>$shortcode
                 );
                 $adddata = $this->Transactions->addLipa($data);
                 if($adddata){
-                   $res = "true";
+                   $merchantresponse = array(
+                    "merchantid"=>$merchantid,
+                    "responsedesc"=>$responsedescription);
+                   echo json_encode(array("response"=>$merchantresponse));
                 }
                 else{
-                    $res = "false";
+                    echo json_encode(array("response"=>"No result found"));
                 }
 
             }
-            echo $res;
         }
     }
 

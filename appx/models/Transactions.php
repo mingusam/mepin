@@ -18,10 +18,16 @@
             }
         }
         public function getStatus($merchantid){
-	    $this->db->select('*");
+	    $this->db->select('ResultDesc,mpesaReceiptNumber,description');
             $this->db->from('lipanampesa');
-            
-            
+            $this->db->where('merchantRequestID',$merchantid);
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            else{
+                return 0;
+            }
         }
         public function getTransactions($shortcode){
             $this->db->select('*');
